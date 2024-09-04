@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio Validar Alumnos</title>
+</head>
+<body>
+    <h1>Comparar cantidad de alumos por materia</h1>
+
+    <label for="cantidadEstudiantesMateria1">Cantidad de estudiantes en materia 1:</label>
+    <input type="number" id="cantidadEstudiantesMateria1" name="cantidadEstudiantesMateria1" min="0" max="100" step="1"><br><br>
+
+    <label for="cantidadEstudiantesMateria2">Cantidad de estudiantes en materia 2:</label>
+    <input type="number" id="cantidadEstudiantesMateria2" name="cantidadEstudiantesMateria2"min="0" max="100" step="1"><br><br>
+
+    <button id="validarButton">Validar</button>
+
+    <script>
+        
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                // Previene entrada de 'e', '-', '.', '+'
+                if (event.key === 'e' || event.key === '-' || event.key === '.' || event.key === '+') {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        document.getElementById("validarButton").addEventListener("click", function() {
+            
+            var AlumnosMateria1 = document.getElementById("cantidadEstudiantesMateria1").value;
+            var AlumnosMateria2 = document.getElementById("cantidadEstudiantesMateria2").value;
+
+            
+            if (AlumnosMateria1 === "" || AlumnosMateria2 === "") {
+                alert("Por favor, ingrese valores para ambos campos.");
+                return;
+            }
+
+            
+            if (isNaN(AlumnosMateria1) || isNaN(AlumnosMateria2)) {
+                alert("Por favor, ingrese solo números enteros para ambos campos.");
+                return;
+            }
+
+            if (AlumnosMateria1 < 0 || AlumnosMateria1 > 100 || AlumnosMateria2 < 0 || AlumnosMateria2 > 100) {
+                alert("Los valores deben estar entre 0 y 100.");
+                return;
+            }
+
+            if (AlumnosMateria1 > AlumnosMateria2) {
+                alert("Materia 1 tiene más estudiantes.");
+            } else if (AlumnosMateria2 > AlumnosMateria1) {
+                alert("Materia 2 tiene más estudiantes.");
+            } else {
+                alert("Las 2 materias tienen la misma cantidad de alumnos.");
+            }
+        });
+
+    </script>
+</body>
+</html>
